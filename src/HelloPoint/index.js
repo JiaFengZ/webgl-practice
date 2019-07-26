@@ -1,3 +1,9 @@
+/**
+ * 流程
+ * --------------
+ * 获取canvas元素 -> 获取webgl绘图上下文 -> 初始化着色器 -> 设置canvas背景色 -> 清除canvas -> 绘图
+ * --------------
+ */
 // 顶点着色器
 var VSHADER_SPURCE = `
   void main() {
@@ -7,10 +13,10 @@ var VSHADER_SPURCE = `
     gl_PointSize = 10.0;
   }
 `
-// 片源着色器
+// 片元着色器
 var FSHADER_SOURCE = `
   void main() {
-    // 片源颜色
+    // 片元颜色
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
   }
 `
@@ -23,7 +29,7 @@ function main() {
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0)
   // 清空canvas
-  gl.clear(gl.COLOR_BUFEER_BIT)
+  gl.clear(gl.COLOR_BUFFER_BIT)
   // 绘制一个点
   gl.drawArrays(gl.POINTS, 0, 1)
 }
