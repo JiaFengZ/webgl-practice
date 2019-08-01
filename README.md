@@ -5,3 +5,4 @@
 * [三角形](./src/MultiPoints/Triangle.js)
 * [简单矩阵变换](./src/SimpleTransform/index.js)
 * [动画](./src/Animation/index.js)
+* [彩色三角形](./src/ColorfulTriangle/index.js)
