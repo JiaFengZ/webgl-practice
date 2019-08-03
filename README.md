@@ -6,3 +6,4 @@
 * [简单矩阵变换](./src/SimpleTransform/index.js)
 * [动画](./src/Animation/index.js)
 * [彩色三角形](./src/ColorfulTriangle/index.js)
+* [加载纹理图像](./src/Texture/index.js)
