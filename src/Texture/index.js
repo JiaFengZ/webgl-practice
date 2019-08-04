@@ -26,6 +26,11 @@
  *                  gl.TEXTURE_WRAP_S 水平填充 
  *                  gl.TEXTURE_WARP_T 垂直填充
  *    @param param 纹理参数的值
+ *                  gl.NEAREST 使用纹理距离新像素中心最近的像素颜色值
+ *                  gl.LINEAR 使用距离新像素中心最近的四个像素的颜色值的加权平均
+ *                  gl.REPEAT 平铺式的纹理
+ *                  gl.MIRRORED_REPEAT 镜像对称式的纹理
+ *                  gl.CLAMP_TO_EDGE 使用纹理图像边缘值
  * 5、gl.texImage2D(target, level, internalformat, format, type, image) 配置纹理对象
  *    @param target gl.TEXTURE_2D 或 gl.TEXTURE_CUBE_MAP
  *    @param level 0（金字塔纹理设置用）

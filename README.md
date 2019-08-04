@@ -5,5 +5,6 @@
 * [三角形](./src/MultiPoints/Triangle.js)
 * [简单矩阵变换](./src/SimpleTransform/index.js)
 * [动画](./src/Animation/index.js)
-* [彩色三角形](./src/ColorfulTriangle/index.js)
+* [彩色三角形](./src/ColorfulTriangle/index.js) [demo](./src/Texture/index.html)
 * [加载纹理图像](./src/Texture/index.js)
+* [多个纹理图像叠加](./src/Texture/MultiTexture.js) [demo](./src/Texture/MultiTexture.html)
