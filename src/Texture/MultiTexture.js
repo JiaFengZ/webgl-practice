@@ -63,7 +63,7 @@ function initVertextBuffers(gl) {
 
   var a_Position = gl.getAttribLocation(gl.program, 'a_Position')
   // 将缓冲区对象分配给a_Position变量（将整个缓冲区对象即引用指针分配给attribute）
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 5, 0)
+  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 4, 0)
   // 连接a_Position到缓冲区对象
   gl.enableVertexAttribArray(a_Position)
 
