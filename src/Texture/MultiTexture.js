@@ -101,13 +101,13 @@ function initTextures(gl, n) {
 var g_texUnit0 = false
 var g_texUnit1 = false
 
-function loadTexture(gl, n, texture, u_Sampler, image, textUnit) {
+function loadTexture(gl, n, texture, u_Sampler, image, texUnit) {
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1)
-  if (textUnit === 0) {
+  if (texUnit === 0) {
     gl.activeTexture(gl.TEXTURE0)
     g_texUnit0 = true
   }
-  if (textUnit === 1) {
+  if (texUnit === 1) {
     gl.activeTexture(gl.TEXTURE1)
     g_texUnit1 = true
   }
