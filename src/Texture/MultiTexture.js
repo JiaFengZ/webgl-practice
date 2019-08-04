@@ -113,8 +113,10 @@ function loadTexture(gl, n, texture, u_Sampler, image, textUnit) {
   }
 
   gl.bindTexture(gl.TEXTURE_2D, texture)
+  // 配置纹理参数
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSINGED_BYTE, image)
+  // 配置纹理图像
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
   gl.uniform1i(u_Sampler, texUnit)
 
   if (g_texUnit0 && g_texUnit1) {
