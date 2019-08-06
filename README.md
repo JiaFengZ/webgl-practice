@@ -8,3 +8,5 @@
 * [彩色三角形](./src/ColorfulTriangle/index.js) [demo](https://jiafengz.github.io/webgl-practice/src/ColorfulTriangle/index.html)
 * [加载纹理图像](./src/Texture/index.js) [demo](https://jiafengz.github.io/webgl-practice/src/Texture/index.html)
 * [多个纹理图像叠加](./src/Texture/MultiTexture.js) [demo](https://jiafengz.github.io/webgl-practice/src/Texture/MultiTexture.html)
+* [三维空间三角形](./src/ThreeDimension/LookAtTriangle.js)
+* [按键改变视点](./src/ThreeDimension/LookAtTriangleWithKey.js)
