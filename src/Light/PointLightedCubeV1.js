@@ -1,24 +1,28 @@
 /**
- * 绘制一个白色平行光照射的红色正方体
- * 如果没有添加环境光反射，视觉效果与日常经验尚有差距
- * 可对比添加环境光的效果
+ * 逐顶点计算点光源照射
  */
 
 var VSHADER_SPURCE = `
   attribute vec4 a_Position;
   attribute vec4 a_Color;
   attribute vec4 a_Normal; // 法向量
+  uniform mat4 u_ModelMatrix; // 模型矩阵
+  uniform mat4 u_NormalMatrix; // 用来变换法向量的矩阵
   uniform mat4 u_MvpMatrix;
   uniform vec3 u_LightColor;
-  uniform vec3 u_LightDirection;
+  uniform vec3 u_LightPosition; // 光源位置
   uniform vec3 u_AmbientLight;
   varying vec4 v_Color;
   void main() {
     gl_Position = u_MvpMatrix * a_Position;
     // 归一化法向量
-    vec3 normal = normalize(vec3(a_Normal));
+    vec3 normal = normalize(vec3(u_NormalMatrix * a_Normal));
+    // 计算顶点的世界坐标
+    vec4 vertexPosition = u_ModelMatrix * a_Position;
+    // 计算光线方向
+    vec3 lightDirection = normalize(u_LightPosition - vec3(vertexPosition));
     // 计算光线和法线的点积
-    float nDotL = max(dot(u_LightDirection, normal), 0.0);
+    float nDotL = max(dot(lightDirection, normal), 0.0);
     // 计算漫反射光颜色
     vec3 diffuse = u_LightColor * vec3(a_Color) * nDotL;
     // 计算环境光反射
@@ -49,41 +53,39 @@ function main() {
   gl.clearColor(0.0, 0.0, 0.0, 1.0)
   gl.enable(gl.DEPTH_TEST)
 
-  var inputs = document.querySelectorAll('[name="ambientLight"]')
-  for (var i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener('change', function(event) {
-      var addAmbient = event.target.value === '1'
-      draw(gl, canvas, n, addAmbient)
-    })
-  }
-
-  draw(gl, canvas, n, false)
+  draw(gl, canvas, n)
 }
 
-function draw(gl, canvas, n, addAmbient) {
+function draw(gl, canvas, n) {
+  var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix')
+  var u_NormalMatrix = gl.getUniformLocation(gl.program, 'u_NormalMatrix')
   var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix')
   var u_LightColor = gl.getUniformLocation(gl.program, 'u_LightColor')
-  var u_LightDirection = gl.getUniformLocation(gl.program, 'u_LightDirection')
+  var u_LightPosition = gl.getUniformLocation(gl.program, 'u_LightPosition')
   var u_AmbientLight = gl.getUniformLocation(gl.program, 'u_AmbientLight')
   // 设置光线颜色
   gl.uniform3f(u_LightColor, 1.0, 1.0, 1.0)
-  if (addAmbient) {
-    gl.uniform3f(u_AmbientLight, 0.2, 0.2, 0.2)
-  } else {
-    gl.uniform3f(u_AmbientLight, 0.0, 0.0, 0.0)
-  }
+  gl.uniform3f(u_AmbientLight, 0.2, 0.2, 0.2)
   
-  // 设置光线方向
-  var lightDirection = new Vector3([0.5, 3.0, 4.0])
-  // 归一化
-  lightDirection.normalize()
-  gl.uniform3fv(u_LightDirection, lightDirection.elements)
+  // 设置点光源
+  gl.uniform3f(u_LightPosition, 0.0, 3.0, 4.0)
+
+  var modelMatrix = new Matrix4()
+  modelMatrix.setRotate(90, 0, 1, 0) // 绕Y轴旋转
+  gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements)
+
+  var normalMatrix = new Matrix4() // 对法线变换
+  normalMatrix.setInverseOf(modelMatrix) // 计算逆矩阵
+  normalMatrix.transpose() // 转置
+  gl.uniformMatrix4fv(u_NormalMatrix, false, normalMatrix.elements)
 
   var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix')
   var mvpMatrix = new Matrix4()
   mvpMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100)
   // 左乘视图矩阵
   mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0)
+  //mvpMatrix.lookAt(-7, 2.5, 6, 0, 0, 0, 0, 1, 0)
+  mvpMatrix.multiply(modelMatrix)
   gl.uniformMatrix4fv(u_MvpMatrix, false, mvpMatrix.elements)
 
   // 绘制
