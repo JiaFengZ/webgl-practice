@@ -14,3 +14,5 @@
 * [透视投影](./src/ThreeDimension/PerspectiveView.js)
 * [正方体](./src/ThreeDimension/Cube.js) [demo](https://jiafengz.github.io/webgl-practice/src/ThreeDimension/Cube.html)
 * [漫反射光照正方体](./src/Light/LightedCube.js) [demo](https://jiafengz.github.io/webgl-practice/src/Light/LightedCube.html)
+* [点光源逐顶点光照](./src/Light/PointLightedCubeV1.js)
+* [点光源逐片元光照](./src/Light/PointLightedCubeV2.js)
