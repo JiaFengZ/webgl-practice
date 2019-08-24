@@ -109,6 +109,7 @@ function keydown(event, gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
       if (g_joint3Angle > -60.0) {
         g_joint3Angle = (g_joint3Angle - ANGLE_STEP) % 360
       }
+      break
     default:
       return
   }

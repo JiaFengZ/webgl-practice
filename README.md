@@ -17,3 +17,4 @@
 * [点光源逐顶点光照](./src/Light/PointLightedCubeV1.js)
 * [点光源逐片元光照](./src/Light/PointLightedCubeV2.js)
 * [单关节运动模型](./src/JointMode/JointMode.js) [demo](https://jiafengz.github.io/webgl-practice/src/JointMode/JointMode.html)
+* [多关节运动模型](./src/JointMode/MultiMode.js) [demo](https://jiafengz.github.io/webgl-practice/src/JointMode/MultiMode.html)
